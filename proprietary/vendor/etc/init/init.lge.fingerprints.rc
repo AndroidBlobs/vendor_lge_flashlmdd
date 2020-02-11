@@ -1,0 +1,12 @@
+on early-fs
+# change mode Fingerprint Test app
+   chmod 666 /dev/goodix_fp
+
+on post-fs-data
+mkdir /mnt/vendor/persist-lg/goodix 0700 system system
+
+on property:vendor.lge.fingerprint.hal_enable=0
+    stop vendor.lge-biometrics-fingerprint-hal-2-1
+
+on property:vendor.lge.fingerprint.hal_enable=1
+    start vendor.lge-biometrics-fingerprint-hal-2-1
